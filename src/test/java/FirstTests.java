@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class FirstTests {
@@ -60,7 +62,17 @@ public class FirstTests {
     }
 
     @Test
-    public void secondTest(){
-
+    public void goToWeekAndSelectFirstBlog(){
+        WebElement weekBtn = driver.findElement(By.xpath("//a[@href='/top/week']"));
+        weekBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.urlToBe("https://dev.to/top/week"));
+//        List<WebElement> blogs = driver.findElements(By.tagName("h2"));
+//        WebElement firstBlog = blogs.get(2);
+        WebElement firstBlog = driver.findElement(By.className("crayons-story__title"));
+        String firstBlogText = firstBlog.getText();
+        firstBlog.click();
+        String blogTitle = driver.findElement(By.cssSelector(".crayons-article__header__meta > h1:first-child")).getText();
+        assertEquals(blogTitle,firstBlogText);
     }
 }
