@@ -74,5 +74,6 @@ public class FirstTests {
         firstBlog.click();
         String blogTitle = driver.findElement(By.cssSelector(".crayons-article__header__meta > h1:first-child")).getText();
         assertEquals(blogTitle,firstBlogText);
+        // test
     }
 }
