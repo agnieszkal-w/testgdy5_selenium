@@ -38,7 +38,7 @@ public class FirstTests {
     @Test
     public void goToPodcastsAndSelectThirdOneAndPlayIt() {
         WebElement podcastBtn = driver.findElement(By.xpath("//a[@href='/pod']"));
-        highlightElement(driver, podcastBtn);
+        highlightElement(driver, podcastBtn); // potrzeby aby widziec, czy element jest znaleziony
         podcastBtn.click();
         //przejscie na strone z podcastami
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -48,15 +48,16 @@ public class FirstTests {
         //for (WebElement podcast: podcasts) {
         //    highlightElement(driver,podcast) ;      }
         // }
-        WebElement thirdPodcast = podcasts.get(2);
+        WebElement thirdPodcast = podcasts.get(2); // numer podcastu 2 oznacza trzeci, 0 to pierwszy i tak dalej
         thirdPodcast.click();
         WebElement recordBtn = driver.findElement(By.className("record-wrapper"));
         recordBtn.click();
+
         wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.className("status-message"))));
         recordBtn.getAttribute("class");
-        String recordBtnClassAtribute = recordBtn.getAttribute( "class");
+        String recordBtnClassAttribute = recordBtn.getAttribute( "class");
 
-        boolean isPlaying = recordBtnClassAtribute.contains("playing");
+        boolean isPlaying = recordBtnClassAttribute.contains("playing");
 
         assertTrue( "podcast wasn't played", isPlaying);
     }
